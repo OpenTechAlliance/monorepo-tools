@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Set remote branch name to be migrated
-BRANCH=develop
+BRANCH=master
 # Does monorepo have main then set to true, otherwise if it has master then set to false.
 MONOREPO_HAS_MAIN_BRANCH=true
 
@@ -43,14 +43,14 @@ done
 # Merge all remote branches
 COMMIT_MSG="merge multiple repositories into an existing monorepo"$'\n'$'\n'"- merged using: 'monorepo_add.sh $@'"$'\n'"- see https://github.com/shopsys/monorepo-tools"
 
-if [ "$BANCH" == "master" ] || [ "$BANCH" == "main" ]; then
+if [ "$BRANCH" == "master" ] || [ "$BRANCH" == "main" ]; then
     if [ "$MONOREPO_HAS_MAIN_BRANCH" = true ]; then
         git checkout main
     else
         git checkout master
     fi
     git checkout -b "migrate/$REMOTE/$BRANCH"
-elif [ "$BANCH" == "develop" ]; then
+elif [ "$BRANCH" == "develop" ]; then
     git checkout $BRANCH
     git checkout -b "migrate/$REMOTE/$BRANCH"
 else
